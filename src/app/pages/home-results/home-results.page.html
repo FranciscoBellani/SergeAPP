@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Sus Reservas</ion-text>
+        </ion-text>
+    </ion-title>
+    
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+    <ion-calendar [(ngModel)]="date"
+    [format]="'YYYY-MM-DD'">
+    </ion-calendar>
+</ion-content>
+  

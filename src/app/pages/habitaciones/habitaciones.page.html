@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Habitaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="bg-profile">
+    
+    <ion-label>
+            
+      <ion-button icon-left size="small" shape="round" color="secondary" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-label>
+  </ion-item>
+
+  <ion-list no-border>
+    <ion-list-header>
+      <ion-text color="dark">
+        <h5>Crear Habitacion</h5>
+      </ion-text>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-button shape="round" color="dark" (click)="editProfile()">
+        <ion-icon name="contact"></ion-icon>
+        Cargar datos
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-text color="dark">
+        <h5>Modificar Habitacion</h5>
+      </ion-text>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-button shape="round" color="dark" (click)="editProfile()">
+        <ion-icon name="contact"></ion-icon>
+        Buscar Habitacion
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-text color="dark">
+        <h5>Eliminar Habitacion</h5>
+      </ion-text>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-button shape="round" color="dark" (click)="editProfile()">
+        <ion-icon name="contact"></ion-icon>
+        Buscar Habitacion
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
