@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cargar Vehiculo:</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="profile">
+  <ion-card no-margin>     
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+          <ion-list margin-bottom>
+            <ion-list-header color="light">
+              <ion-label class="fw700">Complete todos los campos:</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Matricula:</ion-label>
+              <ion-input inputmode="text" placeholder="Ej..:" value=""></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="dark" position="stacked">Marca:</ion-label>
+              <ion-input inputmode="text" placeholder="Ej..:" value=""></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Color:</ion-label>
+              <ion-input inputmode="text" placeholder="Ej..:" value=""></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Modelo:</ion-label>
+              <ion-input inputmode="text" placeholder="Ej..:" value=""></ion-input>
+            </ion-item>
+
+            <ion-checkbox>
+                
+            </ion-checkbox>
+
+            <ion-checkbox>
+              
+            </ion-checkbox>
+
+            <!--  FALTA CHECKBOX COMBUSTIBLE Y SEGURO-->
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Ubicacion:</ion-label>
+              <ion-input inputmode="email" placeholder="Ej.: " value=""></ion-input>
+            </ion-item>  
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Guardar</ion-button>
+  </ion-card>
+  <div padding>
+  </div>
+</ion-content>
+
+
