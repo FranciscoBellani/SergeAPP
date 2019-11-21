@@ -23,11 +23,16 @@ export class UsuariosPage implements OnInit {
   ngOnInit() {
   }
 
-  editProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
   cargarDatos() {
     this.navCtrl.navigateForward('cargar-datos');
+  }
+
+  editarProfile() {
+    this.navCtrl.navigateForward('edit-profile');
+  }
+
+  eliminarProfile() {
+    this.navCtrl.navigateForward('edit-profile');
   }
 
   logout() {
