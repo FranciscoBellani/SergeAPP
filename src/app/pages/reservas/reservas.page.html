@@ -7,7 +7,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content>
+<ion-content>
     <ion-list no-border>
       <ion-list-header>
         <ion-text color="dark">
@@ -16,28 +16,31 @@
       </ion-list-header>
       <ion-item>
         <ion-icon name="settings" slot="start" color="primary"></ion-icon>
-        <ion-label color="primary">Elija Fecha</ion-label>    
+        <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
+        <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="settings" slot="start" color="primary"></ion-icon>
+        <ion-label color="primary">Elija Fecha de Fin</ion-label>    
         <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
       </ion-item>
       <ion-item>
           <ion-label color="dark" position="stacked">Usuario:</ion-label>
           <ion-input inputmode="text" placeholder="Ej..: tecxxx"></ion-input>
       </ion-item>
-        <ion-item>
-          <ion-label color="dark" position="stacked">Email:</ion-label>
-          <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com"></ion-input>
-        </ion-item>
-        <ion-list>
+      <ion-item>
+        <ion-label color="dark" position="stacked">Email:</ion-label>
+        <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com"></ion-input>
+      </ion-item>
+      <ion-list>
             <ion-radio-group>
               <ion-list-header color="light">
                 <ion-label class="fw700">Yacimiento</ion-label>
               </ion-list-header>
-          
               <ion-item>
                 <ion-label color="primary">ASAL</ion-label>
                 <ion-radio slot="start" value="ASAL" checked></ion-radio>
               </ion-item>
-          
               <ion-item>
                 <ion-label color="primary">Los Bastos</ion-label>
                 <ion-radio slot="start" value="Los Bastos"></ion-radio>
@@ -47,8 +50,7 @@
                 <ion-radio slot="start" value="Fortin de Piedra"></ion-radio>
               </ion-item>
             </ion-radio-group>
-
-            </ion-list>
+      </ion-list>
         <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Solicitar Reserva</ion-button>
     </ion-list>
     <ion-list>
@@ -57,7 +59,43 @@
           <h5>Reserva Vehiculos</h5>
         </ion-text>
       </ion-list-header>
-      
-      
     </ion-list>
-  </ion-content>
+    <ion-item>
+      <ion-icon name="settings" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
+      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="settings" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha de Fin</ion-label>    
+      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label color="dark" position="stacked">Usuario:</ion-label>
+        <ion-input inputmode="text" placeholder="Ej..: tecxxx"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark" position="stacked">Email:</ion-label>
+      <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com"></ion-input>
+    </ion-item>
+    <ion-list>
+          <ion-radio-group>
+            <ion-list-header color="light">
+              <ion-label class="fw700">Yacimiento</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label color="primary">ASAL</ion-label>
+              <ion-radio slot="start" value="ASAL" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Los Bastos</ion-label>
+              <ion-radio slot="start" value="Los Bastos"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Fortin de Piedra</ion-label>
+              <ion-radio slot="start" value="Fortin de Piedra"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+    </ion-list>
+      <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Solicitar Reserva</ion-button>
+</ion-content>
