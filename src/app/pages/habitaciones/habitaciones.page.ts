@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { HabitacionService } from './../../services/habitacion.service'
 
 @Component({
   selector: 'app-habitaciones',
@@ -18,14 +19,32 @@ export class HabitacionesPage implements OnInit {
   paymentMethods: any = ['Paypal', 'Credit Card'];
   currencies: any = ['USD', 'BRL', 'EUR'];
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController, private habitacionService: HabitacionService) { }
 
   ngOnInit() {
+    debugger;
+    this.listarHabitaciones();
   }
 
-  editProfile() {
+  listarHabitaciones() {
+    this.habitacionService.listarHabitaciones().subscribe(data => {
+      debugger;
+      let pepe = data;
+    })
+  }
+
+  cargarProfile() {
+    this.navCtrl.navigateForward('');
+  }
+
+  editarProfile() {
     this.navCtrl.navigateForward('edit-profile');
   }
+
+  eliminarProfile() {
+    this.navCtrl.navigateForward('');
+  }
+
 
   logout() {
     this.navCtrl.navigateRoot('/');
