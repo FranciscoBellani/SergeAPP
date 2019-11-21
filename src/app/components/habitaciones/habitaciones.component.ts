@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HabitacionService} from './../../services/habitacion.service'
+import { HabitacionService } from './../../services/habitacion.service'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -17,17 +17,26 @@ export class HabitacionesComponent implements OnInit {
 
 
   ngOnInit() {
+    this.listarHabitaciones();
+
     this.habitacionForm = this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
       ubicacion: new FormControl('', Validators.required),
-      categoria:new FormControl(''),
-  });
+      categoria: new FormControl(''),
+    });
   }
 
-  sendData(){
+  listarHabitaciones() {
+    this.habitacionService.listarHabitaciones().then(capo => {
+      debugger;
+      let pepe = capo;
+    })
+  }
+
+  sendData() {
     const data = this.habitacionForm.getRawValue();
     this.habitacionService.guardarHabitacion(data).then(habitacion => {
-        debugger;
+      debugger;
     });
 
   }
