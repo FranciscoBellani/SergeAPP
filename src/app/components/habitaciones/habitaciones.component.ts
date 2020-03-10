@@ -27,16 +27,20 @@ export class HabitacionesComponent implements OnInit {
   }
 
   listarHabitaciones() {
-    this.habitacionService.listarHabitaciones().then(capo => {
+    this.habitacionService.listarHabitaciones().subscribe(capo => {
       debugger;
       let pepe = capo;
+      console.log('Success: ', capo);
+    },
+    error => {
+      console.log('Error :', error);
     })
   }
 
   sendData() {
     const data = this.habitacionForm.getRawValue();
     this.habitacionService.guardarHabitacion(data).then(habitacion => {
-      debugger;
+      //debugger;
     });
 
   }
