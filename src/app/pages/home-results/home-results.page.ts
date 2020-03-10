@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HomeResultsService } from './../../services/home-results.service'
 import {
   NavController,
   AlertController,
@@ -18,13 +19,16 @@ import { NotificationsComponent } from './../../components/notifications/notific
   templateUrl: './home-results.page.html',
   styleUrls: ['./home-results.page.scss']
 })
-export class HomeResultsPage {
+export class HomeResultsPage implements OnInit {
   searchKey = '';
   yourLocation = '123 Test Street';
   themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
 
+
+
   constructor(
-    public navCtrl: NavController,
+    private homeResultsService: HomeResultsService,
+    public navCtrl: NavController, 
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
     public alertCtrl: AlertController,
@@ -104,6 +108,23 @@ export class HomeResultsPage {
       showBackdrop: true
     });
     return await popover.present();
+  }
+
+ 
+
+  ngOnInit() {
+    
+    this.listarHabitaciones();
+  }
+
+  habitacionesArray: any;
+
+  listarHabitaciones() {
+    this.homeResultsService.listarHabitaciones().subscribe(data => {
+      this.habitacionesArray = data;
+      debugger;
+
+    })
   }
 
 }

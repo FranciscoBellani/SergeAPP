@@ -14,8 +14,18 @@
 </ion-header>
 
 <ion-content>
+    <!-- Habitacion: {{  habitacionesArray | json}} -->
+      <ion-list>
+          <ion-item *ngFor="let habitacion of habitacionesArray">
+            <ion-label>
+              <h3>{{ habitacion.nombre }}</h3>
+            {{ habitacion.ubicacion }}
+            {{ habitacion.categoria }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
     <ion-calendar [(ngModel)]="date"
     [format]="'YYYY-MM-DD'">
     </ion-calendar>
 </ion-content>
-  
