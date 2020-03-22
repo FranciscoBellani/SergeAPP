@@ -1,53 +1,67 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError  } from 'rxjs';
+import { Reserva } from './Reserva';
+import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { ReservaHabitacionesComponent } from './../components/reserva-habitaciones/reserva-habitaciones.component';
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservaHabitacionService {
 
-  urlReservaHabitacion = 'aca va la url del POST';  
+  public fechaInicio: String;
+  public fechaFin: String;
+  public email: String;
+  public consulta: any
+
   constructor(private http: HttpClient) { }
-
-  // aca arranca el nuevo codigo
-  sendData() 
-  {
-    const httpOptions = 
+  // metodo para crear reserva
+  addReserva(reservaParameter: Reserva)     
     {
-      headers: new HttpHeaders
-      ({
-        'Accept':  'application/json;profile=urn:org.apache.isis/v1',
-        'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
-      })
-    }
-    let postData = {
-            "email": "customer004@email.com",
-            "fechainicio": "12/02/2020",
-            "fechafin": "12/02/2020"
-    }
-
-    this.http.post("aca va la url del POST", postData, httpOptions)
-      .subscribe(data => {
-        console.log(data['_body']);
-       }, error => {
-        console.log(error);
-      });
-
+       this.fechaInicio = reservaParameter.fechaInicio;
+       this.fechaFin = reservaParameter.fechaFin;
+       this.email=reservaParameter.email;      
+      const httpOptions = {
+        // Http Parametros de validacion y permisos de acceso
+        headers: new HttpHeaders(
+        { 
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          "Access-Control-Allow-Origin": "http://localhost:8080",
+          'Content-Type': 'application/json' ,
+          'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+          'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',    
+         })
+        };    
+           this.consulta = this.http.post('http://localhost:8080/restful/services/ReservaHabitacion/actions/crearReservaDeHabitacion/invoke',
+            {
+             "fechaInicio": {
+             "value": this.fechaInicio
+            },
+              "fechaFin": {
+              "value": this.fechaFin
+            },
+               "email": {
+               "value": this.email
+            }
+          }
+           , httpOptions);
+             console.log("Consulta: "+ JSON.stringify(this.consulta));
+             return this.consulta;           
   }
+  // // Manejo de Errores
+  // handleError(error: HttpErrorResponse) {
+  //   if (error.error instanceof ErrorEvent) {
+  //     // Problemas de red o del lado del cliente.
+  //     console.error('Ocurrio un error:', error.error.message);
+  //   } else {
+  //     // Se informa cual es el error.
+  //     console.error(
+  //       `Backend returned code ${error.status}, ` +
+  //       `body was: ${error.error}`);
+  //   }
+  //   return throwError(
+  //   'Algo salio mal; Intente mas tarde por favor.');
+  // };
 
-  guardarReservaHabitacion(habitacion): Promise<any> {
-    return new Promise((resolve, reject) => {
-        debugger;
-
-        this.http.post(this.urlReservaHabitacion, habitacion)
-            .subscribe((response: any) => {
-                resolve(response);
-            }, reject);
-    });
 }
-  
-  }
-
-// aca termina el nuevo codigo

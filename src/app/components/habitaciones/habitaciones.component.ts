@@ -17,6 +17,7 @@ export class HabitacionesComponent implements OnInit {
 
 
   ngOnInit() {
+    debugger;
     this.listarHabitaciones();
 
     this.habitacionForm = this.formBuilder.group({

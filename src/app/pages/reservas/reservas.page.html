@@ -1,53 +1,37 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>Reservas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-    <ion-list no-border>
-      <ion-list-header>
-        <ion-text color="dark">
-          <h5>Reserva Habitaciones</h5>
-        </ion-text>
-      </ion-list-header>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <form [formGroup]="ReservaForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
-        <ion-icon name="settings" slot="start" color="primary"></ion-icon>
-        <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
-        <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
+      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" formControlName="fechaInicio"></ion-datetime>
       </ion-item>
+
       <ion-item>
-        <ion-icon name="settings" slot="start" color="primary"></ion-icon>
-        <ion-label color="primary">Elija Fecha de Fin</ion-label>    
-        <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" [(ngModel)]="myDate2"></ion-datetime>
-      </ion-item>      
-      <ion-item>
-        <ion-label color="dark" position="stacked">Email:</ion-label>
-        <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com"></ion-input>
+      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
+      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" formControlName="fechaInicio"></ion-datetime>
       </ion-item>
-      <ion-list>
-            <ion-radio-group>
-              <ion-list-header color="light">
-                <ion-label class="fw700">Yacimiento</ion-label>
-              </ion-list-header>
-              <ion-item>
-                <ion-label color="primary">La Jarilla</ion-label>
-                <ion-radio slot="start" value="ASAL" checked></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label color="primary">Los Bastos</ion-label>
-                <ion-radio slot="start" value="Los Bastos"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label color="primary">Fortin de Piedra</ion-label>
-                <ion-radio slot="start" value="Fortin de Piedra"></ion-radio>
-              </ion-item>
-            </ion-radio-group>
-      </ion-list>
-        <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Solicitar Reserva</ion-button>
-    </ion-list>    
-      
+
+      <ion-item>
+        <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+        <ion-label color="dark" position="stacked">Ingrese su email:</ion-label>
+      <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com" formControlName="email" ></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Hacer Reserva</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { retry, catchError } from 'rxjs/operators';
 
 import { HomeResultsComponent } from './../components/home-results/home-results.component';
 
@@ -9,7 +10,7 @@ import { HomeResultsComponent } from './../components/home-results/home-results.
 })
 export class HomeResultsService {
 
-    urlHabitacion = 'http://localhost:8080/restful/services/Habitacion/actions/listarHabitacionesOcupadas/invoke';
+    urlHabitacion = 'http://localhost:8080/restful/services/ReservaHabitacion/actions/listarReservasDeHabitacionesActivas/invoke';
 
     constructor(private http: HttpClient) { }
     
@@ -23,9 +24,20 @@ export class HomeResultsService {
         return this.http.get<any>(this.urlHabitacion, httpOptions );
     }
 
-
-    buscarHabitacionPorNombre() {
+    // Manejo de Errores
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // Problemas de red o del lado del cliente.
+      console.error('Ocurrio un error:', error.error.message);
+    } else {
+      // Se informa cual es el error.
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
+    return throwError(
+    'Algo salio mal; Intente mas tarde por favor.');
+  };
 
     guardarHabitacion(habitacion): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -38,9 +50,10 @@ export class HomeResultsService {
         });
     }
 
-    eliminarHabitacion(id: Number): Observable<any> {
-        return this.http.delete(this.urlHabitacion);
-    }
-
+    // eliminarHabitacion(id: Number): Observable<any> {
+    //     return this.http.delete(this.urlHabitacion);
+    // }
+// buscarHabitacionPorNombre() {
+    // }
     
 }
