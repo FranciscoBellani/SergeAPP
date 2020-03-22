@@ -11,16 +11,14 @@
     <form [formGroup]="ReservaForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
         <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
-      <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
-      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" formControlName="fechaInicio"></ion-datetime>
+      <ion-label color="primary">Elija Fecha Inicio</ion-label>    
+      <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" dateformat="DD/MM/YYYY" formControlName="fechaInicio"></ion-datetime>
       </ion-item>
-
       <ion-item>
       <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
-      <ion-label color="primary">Elija Fecha de Inicio</ion-label>    
-      <ion-datetime #datePicker pickerFormat="MM/DD/YYYY" formControlName="fechaInicio"></ion-datetime>
+      <ion-label color="primary">Elija Fecha Fin</ion-label>    
+      <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" [(ngModel)]="fechaFin" dateformat="DD/MM/YYYY" formControlName="fechaFin" ></ion-datetime>
       </ion-item>
-
       <ion-item>
         <ion-icon name="mail" slot="start" color="primary"></ion-icon>
         <ion-label color="dark" position="stacked">Ingrese su email:</ion-label>

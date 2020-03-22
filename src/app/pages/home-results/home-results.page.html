@@ -21,6 +21,14 @@
             <h3> {{ habitacion.habitacion["title"] }}</h3>
             <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
             </ion-label>
+            <div class="item-note" item-end>
+              <!-- <button ion-button clear [routerLink]="['/edit-Reserva/', Reserva._id]">
+                <ion-icon name="create" style="zoom:2.0"></ion-icon>
+              </button> -->
+              <button ion-button clear (click)="deleteReserva(Reserva, i)">
+                <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+              </button>
+            </div>
           </ion-item>
         </ion-list>
 

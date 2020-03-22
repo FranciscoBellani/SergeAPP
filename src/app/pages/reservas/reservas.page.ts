@@ -50,7 +50,7 @@ export class ReservasPage implements OnInit {
           this.zone.run(() => {
             console.log(res)
             this.ReservaForm.reset();
-            this.router.navigate(['/home-result']);
+            // this.router.navigate(['/home-result']);
             
           })
         });

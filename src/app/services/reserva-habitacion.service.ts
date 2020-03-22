@@ -13,18 +13,27 @@ export class ReservaHabitacionService {
   public fechaInicio: String;
   public fechaFin: String;
   public email: String;
-  public consulta: any
+  public consulta: any;
+
+  public nuevafechaInicio:string;
+  public nuevafechaFin:string
 
   constructor(private http: HttpClient) { }
   // metodo para crear reserva
   addReserva(reservaParameter: Reserva)     
     {
+
        this.fechaInicio = reservaParameter.fechaInicio;
        this.fechaFin = reservaParameter.fechaFin;
-       this.email=reservaParameter.email;      
-      const httpOptions = {
+       this.email=reservaParameter.email;  
+       //para quitar el timestamp de IONIC de los datetimepicket
+       this.nuevafechaFin = this.fechaFin.split('T')[0];
+       this.nuevafechaInicio=this.fechaInicio.split('T')[0];
+             
+       
         // Http Parametros de validacion y permisos de acceso
-        headers: new HttpHeaders(
+      const httpOptions = {
+       headers: new HttpHeaders(
         { 
           "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
           "Access-Control-Allow-Origin": "http://localhost:8080",
@@ -36,10 +45,11 @@ export class ReservaHabitacionService {
            this.consulta = this.http.post('http://localhost:8080/restful/services/ReservaHabitacion/actions/crearReservaDeHabitacion/invoke',
             {
              "fechaInicio": {
-             "value": this.fechaInicio
+             "value": this.nuevafechaInicio            
+             
             },
               "fechaFin": {
-              "value": this.fechaFin
+              "value": this.nuevafechaFin
             },
                "email": {
                "value": this.email
@@ -49,7 +59,7 @@ export class ReservaHabitacionService {
              console.log("Consulta: "+ JSON.stringify(this.consulta));
              return this.consulta;           
   }
-  // // Manejo de Errores
+  // Manejo de Errores
   // handleError(error: HttpErrorResponse) {
   //   if (error.error instanceof ErrorEvent) {
   //     // Problemas de red o del lado del cliente.
