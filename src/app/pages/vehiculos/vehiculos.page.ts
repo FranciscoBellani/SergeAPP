@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { VehiculoService } from './../../services/vehiculo.service'
 
 @Component({
   selector: 'app-vehiculos',
@@ -18,9 +19,23 @@ export class VehiculosPage implements OnInit {
   paymentMethods: any = ['Paypal', 'Credit Card'];
   currencies: any = ['USD', 'BRL', 'EUR'];
 
-  constructor(public navCtrl: NavController) { }
+  constructor(
+    private vehiculoService: VehiculoService,
+    public navCtrl: NavController
+    
+    ) { }
 
   ngOnInit() {
+    
+    this.listarvehiculos();
+  }
+
+  vehiculosArray: any;
+
+  listarvehiculos() {
+    this.vehiculoService.listarvehiculos().subscribe(data => {
+      this.vehiculosArray = data;
+    })
   }
 
   cargarProfile() {

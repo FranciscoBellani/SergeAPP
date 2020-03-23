@@ -3,62 +3,33 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Reservas de Vehiculos</ion-title>
+    <ion-title>Reserva Vehiculo</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-item class="bg-profile">
-    
-    <ion-label>
-            
-      <ion-button icon-left size="small" shape="round" color="secondary" (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-        Salir
-      </ion-button>
-    </ion-label>
-  </ion-item>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <form [formGroup]="ReservaForm" (ngSubmit)="onFormSubmit()">
+      <ion-item>
+        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha Inicio</ion-label>    
+      <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" dateformat="DD/MM/YYYY" formControlName="fechaInicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">Elija Fecha Fin</ion-label>    
+      <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" [(ngModel)]="fechaFin" dateformat="DD/MM/YYYY" formControlName="fechaFin" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+        <ion-label color="dark" position="stacked">Ingrese su email:</ion-label>
+      <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com" formControlName="email" ></ion-input>
+      </ion-item>
 
-  <ion-list no-border>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Crear Reserva</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="cargarDatos()">
-        <ion-icon name="contact"></ion-icon>
-        Cargar datos
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Cancelar Reserva</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="cancelarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Reservas
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Eliminar Reserva</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="eliminarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Reservas
-      </ion-button>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Hacer Reserva</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-list>
 </ion-content>

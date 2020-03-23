@@ -29,22 +29,28 @@ export class AppComponent {
         icon: 'home'
       },
       {
-        title: 'Hacer Reserva',
+        title: 'Reservar Habitacion',
         url: '/reservas',
         direct: 'forward',
         icon: 'calendar'
       },
       {
-        title: 'ABM Usuarios',
-        url: '/usuarios',
+        title: 'Reservar Vehiculo',
+        url: '/reservasVehiculos',
         direct: 'forward',
-        icon: 'people'
+        icon: 'calendar'
       },
       {
-        title: 'ABM Habitaciones',
+        title: 'Habitaciones Ocupadas',
         url: '/habitaciones',
         direct: 'forward',
         icon: 'key'
+      },
+      {
+        title: 'Vehiculos Ocupados',
+        url: '/vehiculos',
+        direct: 'forward',
+        icon: 'car'
       },
       {
         title: 'Contacto',

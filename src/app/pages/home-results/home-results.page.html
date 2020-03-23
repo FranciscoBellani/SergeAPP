@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>
         <ion-text color="light">
-          <ion-text color="light" class="fw700">Reservas Activas</ion-text>
+          <ion-text color="light" class="fw400">Reservas Disponibles</ion-text>
         </ion-text>
     </ion-title>
     
@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content>
-       <ion-list>
+       <!-- <ion-list>
           <ion-item *ngFor="let habitacion of habitacionesArray">
             <ion-label>
             <h3> {{ habitacion.persona["title"] }}</h3>
@@ -22,15 +22,13 @@
             <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
             </ion-label>
             <div class="item-note" item-end>
-              <!-- <button ion-button clear [routerLink]="['/edit-Reserva/', Reserva._id]">
-                <ion-icon name="create" style="zoom:2.0"></ion-icon>
-              </button> -->
+              
               <button ion-button clear (click)="deleteReserva(Reserva, i)">
                 <ion-icon name="trash" style="zoom:2.0"></ion-icon>
               </button>
             </div>
           </ion-item>
-        </ion-list>
+        </ion-list> -->
 
     <!-- <ion-calendar [(ngModel)]="date"
     [format]="'YYYY-MM-DD'">

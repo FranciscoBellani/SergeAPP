@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HabitacionService } from './../../services/habitacion.service'
 
+
 @Component({
   selector: 'app-habitaciones',
   templateUrl: './habitaciones.page.html',
@@ -21,15 +22,15 @@ export class HabitacionesPage implements OnInit {
 
   constructor(public navCtrl: NavController, private habitacionService: HabitacionService) { }
 
-  ngOnInit() {
-    debugger;
+  ngOnInit() 
+  {    
     this.listarHabitaciones();
   }
+  habitacionesArray: any;
 
   listarHabitaciones() {
     this.habitacionService.listarHabitaciones().subscribe(data => {
-      debugger;
-      let pepe = data;
+      this.habitacionesArray = data;
     })
   }
 

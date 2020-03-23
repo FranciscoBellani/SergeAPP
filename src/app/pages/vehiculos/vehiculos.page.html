@@ -1,64 +1,32 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-menu-button color="secondary"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Vehiculos</ion-title>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Vehiculos Activos</ion-text>
+        </ion-text>
+    </ion-title>
+    
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
-  <ion-item class="bg-profile">
-    
-    <ion-label>
-            
-      <ion-button icon-left size="small" shape="round" color="secondary" (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-        Salir
-      </ion-button>
-    </ion-label>
-  </ion-item>
-
-  <ion-list no-border>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Crear Vehiculo</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="cargarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Cargar datos
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Modificar Vehiculo</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="editarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Vehiculo
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Eliminar Vehiculo</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="eliminarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Vehiculo
-      </ion-button>
-    </ion-item>
-  </ion-list>
+    <!-- Habitacion: {{  habitacionesArray | json}} -->
+      <ion-list>
+          <ion-item *ngFor="let vehiculo of vehiculosArray">
+            <ion-label>
+           <h3>Matricula: {{ vehiculo.matricula }}</h3>
+           <h3> Modelo: {{ vehiculo.modelo}}</h3>
+            <h3> Ubicacion: {{ vehiculo.ubicacion}}</h3>
+           </ion-label>
+           <div class="item-note" item-end>
+              <button ion-button clear (click)="deleteReserva(Reserva, i)">
+              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+            </button>
+          </div>
+          </ion-item>
+        </ion-list>
 </ion-content>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit,NgZone } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController, MenuController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ReservaVehiculoService } from './../../services/reserva-vehiculo.service'
 
 @Component({
   selector: 'app-reservas-vehiculos',
@@ -7,36 +10,62 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./reservasVehiculos.page.scss'],
 })
 export class ReservasVehiculosPage implements OnInit {
-  lang: any;
-  enableNotifications: any;
-  paymentMethod: any;
-  currency: any;
-  enablePromo: any;
-  enableHistory: any;
+  public ReservaForm: FormGroup;
 
-  languages: any = ['English', 'Portuguese', 'French'];
-  paymentMethods: any = ['Paypal', 'Credit Card'];
-  currencies: any = ['USD', 'BRL', 'EUR'];
+  constructor(
+    
+    public reservaVehiculo: ReservaVehiculoService,
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
+    public loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    public router: Router,
+    private zone: NgZone
+    
+    )
+     {
+      this.ReservaForm = this.formBuilder.group
+      ({
+        fechaInicio: [''],
+        fechaFin: [''],
+        email: ['']
+      })
+     }
 
-  constructor(public navCtrl: NavController) { }
-
+  
   ngOnInit() {
   }
 
-  cargarDatos() {
-    this.navCtrl.navigateForward('usuarios');
-  }
+  onFormSubmit() {
+    if (!this.ReservaForm.valid) {
+      return false;
+    } else {
+      this.reservaVehiculo.addReserva(this.ReservaForm.value)
+        .subscribe((res) => {
+          this.zone.run(() => {
+            console.log(res)
+            this.ReservaForm.reset();
+            // this.router.navigate(['/home-result']);
+            
+          })
+        });
+    }
 
-  editarProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
+  // cargarDatos() {
+  //   this.navCtrl.navigateForward('usuarios');
+  // }
 
-  eliminarProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
+  // editarProfile() {
+  //   this.navCtrl.navigateForward('edit-profile');
+  // }
 
-  logout() {
-    this.navCtrl.navigateRoot('/');
-  }
+  // eliminarProfile() {
+  //   this.navCtrl.navigateForward('edit-profile');
+  // }
 
+  // logout() {
+  //   this.navCtrl.navigateRoot('/');
+  // }
+
+}
 }

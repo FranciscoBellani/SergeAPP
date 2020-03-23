@@ -23,12 +23,12 @@ export class ReservaVehiculosComponent implements OnInit {
   });
   }
 
-  sendData(){
-    const data = this.reservaVehiculoForm.getRawValue();
-    this.reservaVehiculoService.guardarReservaVehiculo(data).then(reserva => {
-        debugger;
-    });
+  // sendData(){
+  //   const data = this.reservaVehiculoForm.getRawValue();
+  //   this.reservaVehiculoService.guardarReservaVehiculo(data).then(reserva => {
+  //       debugger;
+  //   });
 
-  }
+  
 
 }

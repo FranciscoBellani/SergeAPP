@@ -3,62 +3,35 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Habitaciones</ion-title>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw400">Habitaciones Activas</ion-text>
+        </ion-text>
+    </ion-title>    
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
-  <ion-item class="bg-profile">
-    
-    <ion-label>
-            
-      <ion-button icon-left size="small" shape="round" color="secondary" (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-        Salir
-      </ion-button>
-    </ion-label>
-  </ion-item>
+       <ion-list>
+          <ion-item *ngFor="let habitacion of habitacionesArray">
+            <ion-label>
+            <h3> {{ habitacion.persona["title"] }}</h3>
+            <h3> {{ habitacion.habitacion["title"] }}</h3>
+            <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
+            </ion-label>
+            <div class="item-note" item-end>
+              <!-- <button ion-button clear [routerLink]="['/edit-Reserva/', Reserva._id]">
+                <ion-icon name="create" style="zoom:2.0"></ion-icon>
+              </button> -->
+              <button ion-button clear (click)="deleteReserva(Reserva, i)">
+                <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+              </button>
+            </div>
+          </ion-item>
+        </ion-list>
 
-  <ion-list no-border>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Crear Habitacion</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="cargarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Cargar datos
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Modificar Habitacion</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="editarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Habitacion
-      </ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-text color="dark">
-        <h5>Eliminar Habitacion</h5>
-      </ion-text>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-button shape="round" color="dark" (click)="eliminarProfile()">
-        <ion-icon name="contact"></ion-icon>
-        Buscar Habitacion
-      </ion-button>
-    </ion-item>
-  </ion-list>
+    <!-- <ion-calendar [(ngModel)]="date"
+    [format]="'YYYY-MM-DD'">
+    </ion-calendar> -->
 </ion-content>
