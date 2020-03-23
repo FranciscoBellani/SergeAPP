@@ -10,7 +10,9 @@ import { HomeResultsComponent } from './../components/home-results/home-results.
 })
 export class HomeResultsService {
 
-    urlHabitacion = 'http://localhost:8080/restful/services/ReservaHabitacion/actions/listarReservasDeHabitacionesActivas/invoke';
+    urlHabitacion = 'http://localhost:8080/restful/services/Habitacion/actions/listarHabitacionesDisponibles/invoke';
+
+    urlVehiculo = 'http://localhost:8080/restful/services/Vehiculo/actions/listarVehiculosDisponibles/invoke';
 
     constructor(private http: HttpClient) { }
     
@@ -23,6 +25,16 @@ export class HomeResultsService {
         }
         return this.http.get<any>(this.urlHabitacion, httpOptions );
     }
+
+    listarVehiculos(): Observable<any> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+            'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+            'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
+          })
+      }
+      return this.http.get<any>(this.urlVehiculo, httpOptions );
+  }
 
     // Manejo de Errores
   handleError(error: HttpErrorResponse) {

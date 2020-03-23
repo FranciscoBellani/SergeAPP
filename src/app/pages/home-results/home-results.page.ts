@@ -115,14 +115,24 @@ export class HomeResultsPage implements OnInit {
   ngOnInit() {
     
     this.listarHabitaciones();
+    this.listarVehiculos();
   }
 
   habitacionesArray: any;
+  vehiculosArray:any;
 
   listarHabitaciones() {
     this.homeResultsService.listarHabitaciones().subscribe(data => {
       this.habitacionesArray = data;
-      debugger;
+      // debugger;
+
+    })
+  }
+
+  listarVehiculos() {
+    this.homeResultsService.listarVehiculos().subscribe(data => {
+      this.vehiculosArray = data;
+      // debugger;
 
     })
   }

@@ -5,30 +5,41 @@
     </ion-buttons>
     <ion-title>
         <ion-text color="light">
-          <ion-text color="light" class="fw400">Reservas Disponibles</ion-text>
+          <ion-text color="light" class="fw400">Reservas SERGE</ion-text>
         </ion-text>
-    </ion-title>
-    
+    </ion-title>    
   </ion-toolbar>
   
 </ion-header>
 
 <ion-content>
-       <!-- <ion-list>
+  
+       <ion-list>
+        <ion-title>
+          Habitaciones Libres
+        </ion-title>
           <ion-item *ngFor="let habitacion of habitacionesArray">
             <ion-label>
-            <h3> {{ habitacion.persona["title"] }}</h3>
-            <h3> {{ habitacion.habitacion["title"] }}</h3>
-            <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
+            <h3> Habitacion: {{ habitacion.nombre }}</h3>
+            <h3> Categoria: {{ habitacion.categoria}}</h3>
+            <h3> Ubicacion: {{ habitacion.ubicacion}}</h3>
             </ion-label>
-            <div class="item-note" item-end>
-              
-              <button ion-button clear (click)="deleteReserva(Reserva, i)">
-                <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-              </button>
-            </div>
           </ion-item>
-        </ion-list> -->
+        </ion-list>
+
+        <ion-list>
+          <ion-title>
+            Vehiculos Libres
+          </ion-title>
+            <ion-item *ngFor="let vehiculo of vehiculosArray">
+              <ion-label>
+                <h3> Matricula: {{ vehiculo.matricula }}</h3>
+                <h3> Marca: {{ vehiculo.marca}}</h3>
+                <h3> Modelo: {{ vehiculo.modelo}}</h3>
+                <h3> Ubicacion: {{ vehiculo.ubicacion}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-list>
 
     <!-- <ion-calendar [(ngModel)]="date"
     [format]="'YYYY-MM-DD'">
