@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { VehiculoService } from './../../services/vehiculo.service'
+import { Reserva } from 'src/app/models/reserva';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { promise } from 'protractor';
+
 
 @Component({
   selector: 'app-vehiculos',
@@ -8,26 +12,22 @@ import { VehiculoService } from './../../services/vehiculo.service'
   styleUrls: ['./vehiculos.page.scss'],
 })
 export class VehiculosPage implements OnInit {
-  lang: any;
-  enableNotifications: any;
-  paymentMethod: any;
-  currency: any;
-  enablePromo: any;
-  enableHistory: any;
+  
+  Reservas: any = [];
+  
 
-  languages: any = ['English', 'Portuguese', 'French'];
-  paymentMethods: any = ['Paypal', 'Credit Card'];
-  currencies: any = ['USD', 'BRL', 'EUR'];
 
   constructor(
     private vehiculoService: VehiculoService,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    
     
     ) { }
 
   ngOnInit() {
     
     this.listarvehiculos();
+    
   }
 
   vehiculosArray: any;
@@ -37,6 +37,35 @@ export class VehiculosPage implements OnInit {
       this.vehiculosArray = data;
     })
   }
+
+
+  cancelarReserva(Reserva, i) {
+    if (window.confirm('¿Cancelar esta reserva?')) {
+      debugger
+      this.vehiculoService.cancelarReserva(Reserva.objectId)
+        .subscribe(() => {
+          this.Reservas.splice(i, 1);
+          console.log('Reserva Cancelada!')
+        }
+        )
+    }
+  }
+  // cancelarReserva(Reserva, i) {
+  //   if (window.confirm('¿Cancelar esta reserva?')) {
+  //     debugger
+  //     this.vehiculoService.cancelarReserva(Reserva._id)
+  //  {
+  //         this.Reservas.splice(i, 1);
+  //         console.log('Reserva Cancelada')
+  //       }
+        
+  //   }
+  // }
+
+
+
+
+
 
   cargarProfile() {
     this.navCtrl.navigateForward('/vehiculos');

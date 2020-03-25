@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError  } from 'rxjs';
 import { Reserva } from './Reserva';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
-import { ReservaVehiculosComponent } from './../components/reserva-vehiculos/reserva-vehiculos.component';
 import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({

@@ -16,13 +16,13 @@ import { ImagePageModule } from './pages/modal/image/image.module';
 import { SearchFilterPageModule } from './pages/modal/search-filter/search-filter.module';
 
 // Components
-import { NotificationsComponent } from './components/notifications/notifications.component';
+
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, NotificationsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,7 +32,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     ImagePageModule,
     SearchFilterPageModule
   ],
-  entryComponents: [NotificationsComponent],
+  entryComponents: [],
   providers: [
     StatusBar,
     SplashScreen,

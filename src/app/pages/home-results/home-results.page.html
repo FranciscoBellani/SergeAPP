@@ -13,35 +13,15 @@
 </ion-header>
 
 <ion-content>
-  
-       <ion-list>
-        <ion-title>
-          Habitaciones Libres
-        </ion-title>
-          <ion-item *ngFor="let habitacion of habitacionesArray">
-            <ion-label>
-            <h3> Habitacion: {{ habitacion.nombre }}</h3>
-            <h3> Categoria: {{ habitacion.categoria}}</h3>
-            <h3> Ubicacion: {{ habitacion.ubicacion}}</h3>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-
-        <ion-list>
-          <ion-title>
-            Vehiculos Libres
-          </ion-title>
-            <ion-item *ngFor="let vehiculo of vehiculosArray">
-              <ion-label>
-                <h3> Matricula: {{ vehiculo.matricula }}</h3>
-                <h3> Marca: {{ vehiculo.marca}}</h3>
-                <h3> Modelo: {{ vehiculo.modelo}}</h3>
-                <h3> Ubicacion: {{ vehiculo.ubicacion}}</h3>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-
-    <!-- <ion-calendar [(ngModel)]="date"
-    [format]="'YYYY-MM-DD'">
-    </ion-calendar> -->
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <img src="assets/img/logotecpe.png" />      
+      <h2>Bienvenido</h2>
+      <!-- <ion-text color="dark" class="fw500">Serge - Sistema de reservas </ion-text> -->
+      </ion-slide>
+    <ion-slide>
+      <h2>Gestion</h2>
+      <ion-text color="dark" class="fw500">Control y administracion de habitaciones y vehiculos </ion-text>
+       </ion-slide>
+  </ion-slides>
 </ion-content>

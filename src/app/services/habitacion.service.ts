@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
-import { HabitacionesComponent } from './../components/habitaciones/habitaciones.component';
+
 
 @Injectable({
     providedIn: 'root'

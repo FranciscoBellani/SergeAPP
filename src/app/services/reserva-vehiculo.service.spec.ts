@@ -5,7 +5,7 @@ import { ReservaVehiculoService } from './reserva-vehiculo.service';
 describe('ReservaVehiculoService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it('deberia haberse creado', () => {
     const service: ReservaVehiculoService = TestBed.get(ReservaVehiculoService);
     expect(service).toBeTruthy();
   });
