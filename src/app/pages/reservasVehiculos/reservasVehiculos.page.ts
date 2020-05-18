@@ -12,6 +12,9 @@ import { ToastService } from './../../services/toast.service';
 })
 export class ReservasVehiculosPage implements OnInit {
   public ReservaForm: FormGroup;
+    
+  minDate: string = new Date().toISOString();
+  selectedDate: string = new Date().toISOString();
 
   constructor(
 
