@@ -5,56 +5,40 @@
     <!-- Logo -->
     <div padding-horizontal text-center class="animated fadeInDown">
       <div class="logo"></div>
-      <h4 no-margin>
-        
+      <h4 no-margin>        
       </h4>
     </div>
 
-    <!-- Login form -->
-    <form [formGroup]="onLoginForm" class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
+    <form [formGroup]="onLoginForm" class="list-form" (ngSubmit)="onSubmit()">
+      <ion-item no-padding class="animated fadeInUp"  id="rounded">
         <ion-label position="floating">
-          <ion-icon name="people" item-start></ion-icon>
+          <ion-icon name="person-circle" item-start></ion-icon>
           Usuario
         </ion-label>
-        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+        <ion-input color="black" type="text" formControlName="usuario" autocomplete="off"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
-        <ion-text color="warning">
+      <p ion-text *ngIf="onLoginForm.get('usuario').touched && onLoginForm.get('usuario').hasError('required')">
+        <ion-text color="danger">
           Campo requerido
         </ion-text>
       </p>
-
-      <ion-item no-padding class="animated fadeInUp">
+  
+      <ion-item no-padding class="animated fadeInUp" id="rounded">
         <ion-label position="floating">
-          <ion-icon name="lock" item-start></ion-icon>
+          <ion-icon name="lock-closed" item-start></ion-icon>
           Contraseña
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+        <ion-input (keyup.enter)="presionaEnter()" color="black" type="password" formControlName="contrasena" autocomplete="off"></ion-input>
       </ion-item>
-      <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
-        <ion-text color="warning">
-          Campo requerido
-        </ion-text>
-        </p>
+      <p ion-text *ngIf="onLoginForm.get('contrasena').touched && onLoginForm.get('contrasena').hasError('required')">
+        <ion-text color="danger">Campo requerido</ion-text>
+      </p>
+  
+        <ion-button type="submit" icon-left size="medium" expand="full" shape="round" color="primary" [disabled]="onLoginForm.invalid" tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Ingresar
+        </ion-button>
     </form>
-
-    
-    <div>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()" [disabled]="!onLoginForm.valid" tappable>
-        <ion-icon name="log-in"></ion-icon>
-        Ingresar
-      </ion-button>
-    </div>
-
-    <!-- Other links
-    <div text-center margin-top>
-      <span (click)="goToRegister()" class="paz" tappable>
-        <ion-text color="light">
-          <strong>Registrarse</strong>
-        </ion-text>
-      </span>
-    </div> -->
 
   </div>
 </ion-content>

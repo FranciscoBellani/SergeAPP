@@ -16,10 +16,6 @@ export class HabitacionesPage implements OnInit {
   enablePromo: any;
   enableHistory: any;
 
-  languages: any = ['English', 'Portuguese', 'French'];
-  paymentMethods: any = ['Paypal', 'Credit Card'];
-  currencies: any = ['USD', 'BRL', 'EUR'];
-
   constructor(public navCtrl: NavController, private habitacionService: HabitacionService) { }
 
   ngOnInit() 
@@ -50,5 +46,7 @@ export class HabitacionesPage implements OnInit {
   logout() {
     this.navCtrl.navigateRoot('/');
   }
+
+
 
 }

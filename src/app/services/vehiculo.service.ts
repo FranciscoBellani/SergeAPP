@@ -3,25 +3,28 @@ import { Reserva } from './Reserva';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { debug } from 'util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiculoService {
 
-    urlVehiculo = 'http://localhost:8080/restful/services/Vehiculo/actions/listarVehiculosOcupados/invoke';
-    public _id: Number;
-
+    urlVehiculo = 'http://localhost:8080/restful/services/ReservaVehiculo/actions/listarReservasDeVehiculosActivas/invoke';
+    public reservaId: any;
+    public consulta: any;
     constructor(private http: HttpClient) { }
+
+   
+  
+  public IPServidor: String = 'http://localhost:8080/';
+  public URLservidor: String;
 
     httpOptions = {
       headers: new HttpHeaders(
         { 
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          "Access-Control-Allow-Origin": "http://localhost:8080",
-          'Content-Type': 'application/json' ,
           'Accept':  'application/json;profile=urn:org.apache.isis/v1',
-          'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
+          'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
       })
     };
     
@@ -47,32 +50,26 @@ export class VehiculoService {
       });
      }
 
-    //  cancelarReserva(id): Promise<Reserva[]> {       
-    //    return new Promise((resolve, reject) =>{
-    //       debugger;
-    //       this.http.post('http://localhost:8080/restful/objects/simple.ReservaVehiculo/1/actions/cancelar/invoke' + id, null,this.httpOptions)
-    //           .subscribe((response: any) => {
-    //               resolve(response);
-    //    }, reject);
-    //    });
-       
-    cancelarReserva(id): Observable<Reserva[]> 
+     cancelarReserva(id:String)
     {
-      
-      return this.http.delete<Reserva[]>('http://localhost:8080/restful/objects/simple.ReservaVehiculo/1/actions/cancelar/invoke' + id, this.httpOptions)
-        .pipe(
-          tap(_ => console.log(`Reserva Eliminada: ${id}`)),
-          catchError(this.handleError<Reserva[]>('Reserva Eliminada correctamente'))
-        );
+        const httpOptions = {
+            headers: new HttpHeaders({
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                "Access-Control-Allow-Origin": "http://localhost:8080",
+                'Content-Type': 'application/json' ,
+                'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+                'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
+                
+            })
+        }
+           this.http.post("http://localhost:8080/restful/objects/simple.ReservaVehiculo/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
+           .subscribe(data => {
+             console.log(data['_body']);
+            }, error => {
+             console.log(error);
+           });
     }
-    
-
-    private handleError<T>(operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-        console.error(error);
-        console.log(`${operation} failed: ${error.message}`);
-        return of(result as T);
-      };
-    }
+   
+   
   
 }

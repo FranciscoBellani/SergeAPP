@@ -9,7 +9,6 @@
         </ion-text>
     </ion-title>    
   </ion-toolbar>
-  
 </ion-header>
 
 <ion-content>
@@ -21,17 +20,16 @@
             <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
             </ion-label>
             <div class="item-note" item-end>
-              <!-- <button ion-button clear [routerLink]="['/edit-Reserva/', Reserva._id]">
-                <ion-icon name="create" style="zoom:2.0"></ion-icon>
-              </button> -->
-              <button ion-button clear (click)="deleteReserva(Reserva, i)">
-                <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+                <button ion-button clear (click)="deleteReserva(Reserva, i)">
+                <ion-icon name="trash" size="small" expand="full" shape="round" color="primary"></ion-icon>
               </button>
+
+              <!-- <ion-button type="submit" size="small" expand="full" shape="round" color="primary">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button> -->
+
+
             </div>
           </ion-item>
         </ion-list>
-
-    <!-- <ion-calendar [(ngModel)]="date"
-    [format]="'YYYY-MM-DD'">
-    </ion-calendar> -->
 </ion-content>

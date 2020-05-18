@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>
         <ion-text color="light">
-          <ion-text color="light" class="fw700">Vehiculos Activos</ion-text>
+          <ion-text color="light" class="fw700">Reservas Activas</ion-text>
         </ion-text>
     </ion-title>
     
@@ -14,20 +14,20 @@
 </ion-header>
 
 <ion-content>
-    <!-- Listado de Vehiculos -->
-      <ion-list>
-          <ion-item *ngFor="let vehiculo of vehiculosArray">
-            <ion-label>
-           <h3>Matricula: {{ vehiculo.matricula }}</h3>
-           <h3> Modelo: {{ vehiculo.modelo}}</h3>
-            <h3> Ubicacion: {{ vehiculo.ubicacion}}</h3>
-            <h3> ID Reserva: {{ vehiculo.$$instanceId}}</h3>
-           </ion-label>
-           <div class="item-note" item-end>
-              <button ion-button clear (click)="cancelarReserva(Reserva, i)">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-          </div>
+        <ion-list>
+          <ion-item *ngFor="let reserva of vehiculosArray">
+            <ion-label>  
+              <h3> Inicia: {{ reserva.fechaInicio}}</h3>
+                <h3> Finaliza: {{ reserva.fechaFin}}</h3>
+                <h3> {{ reserva.vehiculo["title"] }}</h3>
+                <h3> {{ reserva.persona["title"] }}</h3>                             
+               </ion-label>               
+                <ion-input type="text" [(ngModel)]="idreserva"></ion-input>
+                <div class="item-note" item-end>
+                  <button clear (click)="cancelarReserva(reserva.$$instanceId)">
+                    <ion-icon name="trash" size="small" expand="full" shape="round" color="primary"></ion-icon>
+                  </button>  
+               </div>
           </ion-item>
         </ion-list>
-</ion-content>
+       </ion-content>

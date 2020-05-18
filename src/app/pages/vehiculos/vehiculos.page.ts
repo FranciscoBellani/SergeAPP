@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { ActivatedRoute} from '@angular/router';
+import { AlertController,NavController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehiculoService } from './../../services/vehiculo.service'
-import { Reserva } from 'src/app/models/reserva';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { promise } from 'protractor';
+import { debug } from 'util';
+
 
 
 @Component({
@@ -13,21 +14,43 @@ import { promise } from 'protractor';
 })
 export class VehiculosPage implements OnInit {
   
+  idReserva='idreserva';
+
   Reservas: any = [];
+  public consulta: any;
   
-
-
   constructor(
-    private vehiculoService: VehiculoService,
+    
+    private activatedRoute: ActivatedRoute,
     public navCtrl: NavController,
-    
-    
+    public alertCtrl: AlertController,
+    private vehiculoService: VehiculoService
     ) { }
+    public arrayAutorizacion: any = [];
+    public solicitanteEmpresa: String;
+    public solicitanteTrabajador: String;
+    public solicitanteVehiculo: String;
+    public empresasEjecutantes: any =[];
+    public empresasEjecutantesLargo: any;
+    public trabajadoresEjecutantes: any;
+    public trabajadoresEjecutantesLargo :any;
+    public vehiculosEjecutantes: any;
+    public vehiculosEjecutantesLargo: any;
+    public permiteBtnCerrar: boolean;
+    public recipeId: any;
+    public FechaHoraPersonalizada: any;
+    //private alertCtrl: AlertController;
+    public inputFecha: any;
+    public inputHora: any;
+    public inputMotivo: any;
+    public fechaHoraUnidas: any;
+    
 
   ngOnInit() {
     
-    this.listarvehiculos();
-    
+     this.listarvehiculos();
+
+
   }
 
   vehiculosArray: any;
@@ -38,49 +61,16 @@ export class VehiculosPage implements OnInit {
     })
   }
 
-
-  cancelarReserva(Reserva, i) {
+  cancelarReserva(id:String) {
     if (window.confirm('¿Cancelar esta reserva?')) {
-      debugger
-      this.vehiculoService.cancelarReserva(Reserva.objectId)
-        .subscribe(() => {
-          this.Reservas.splice(i, 1);
-          console.log('Reserva Cancelada!')
-        }
-        )
-    }
+      //debugger
+      this.vehiculoService.cancelarReserva(id)
+      {
+        this.Reservas.splice(id, 1);
+        console.log('Reserva Cancelada');
+        this.navCtrl.navigateForward('/vehiculos');
+      } 
   }
-  // cancelarReserva(Reserva, i) {
-  //   if (window.confirm('¿Cancelar esta reserva?')) {
-  //     debugger
-  //     this.vehiculoService.cancelarReserva(Reserva._id)
-  //  {
-  //         this.Reservas.splice(i, 1);
-  //         console.log('Reserva Cancelada')
-  //       }
-        
-  //   }
-  // }
-
-
-
-
-
-
-  cargarProfile() {
-    this.navCtrl.navigateForward('/vehiculos');
-  }
-
-  editarProfile() {
-    this.navCtrl.navigateForward('vehiculos');
-  }
-  
-  eliminarProfile() {
-    this.navCtrl.navigateForward('vehiculos');
-  }
-
-  logout() {
-    this.navCtrl.navigateRoot('/');
   }
 
 }
