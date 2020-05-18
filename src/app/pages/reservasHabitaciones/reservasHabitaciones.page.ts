@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController, MenuController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ReservaHabitacionService } from './../../services/reserva-habitacion.service'
+import { ToastService } from './../../services/toast.service';
 
 @Component({
   selector: 'app-reservas-habitaciones',
@@ -7,36 +11,48 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./reservasHabitaciones.page.scss'],
 })
 export class ReservasHabitacionesPage implements OnInit {
-  lang: any;
-  enableNotifications: any;
-  paymentMethod: any;
-  currency: any;
-  enablePromo: any;
-  enableHistory: any;
+  public ReservaForm: FormGroup;
 
-  languages: any = ['English', 'Portuguese', 'French'];
-  paymentMethods: any = ['Paypal', 'Credit Card'];
-  currencies: any = ['USD', 'BRL', 'EUR'];
+  constructor(
 
-  constructor(public navCtrl: NavController) { }
+    public reservaHabitacion: ReservaHabitacionService,
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
+    public loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    public router: Router,
+    private zone: NgZone,
+    private toastService: ToastService,
+    
+    ) {
+      this.ReservaForm = this.formBuilder.group
+      ({
+        fechaInicio: [''],
+        fechaFin: [''],
+        email: ['']
+      })
+     }
 
   ngOnInit() {
   }
 
-  cargarDatos() {
-    this.navCtrl.navigateForward('usuarios');
-  }
-
-  editarProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
-
-  eliminarProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
-
-  logout() {
-    this.navCtrl.navigateRoot('/');
+  onFormSubmit() {
+    if (!this.ReservaForm.valid) { return false; }
+    else {
+      if
+        (
+        this.reservaHabitacion.addReserva(this.ReservaForm.value)
+          .subscribe((res) => {
+            this.zone.run(() => {
+              console.log(res)
+              this.toastService.presentToast('Reserva guardada. Muchas Gracias');
+              this.ReservaForm.reset();
+            })
+          })
+      ) {
+        this.toastService.presentToast('Error, consulte con el administrador');
+      }
+    }
   }
 
 }

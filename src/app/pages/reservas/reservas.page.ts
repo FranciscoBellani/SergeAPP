@@ -4,6 +4,7 @@ import { NavController, MenuController, LoadingController } from '@ionic/angular
 import { Reserva } from './../../models/reserva';
 import { ReservaHabitacionService } from './../../services/reserva-habitacion.service'
 import { Router } from '@angular/router';
+import { ToastService } from './../../services/toast.service';
 
 @Component({
   selector: 'app-reservas',
@@ -13,7 +14,9 @@ import { Router } from '@angular/router';
 export class ReservasPage implements OnInit {
   public ReservaForm: FormGroup;
 
-  // data: Reserva
+  
+  minDate: string = new Date().toISOString();
+  selectedDate: string = new Date().toISOString();
 
   constructor(
     public reservaHabitacion: ReservaHabitacionService,    
@@ -22,7 +25,9 @@ export class ReservasPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     public router: Router,
-    private zone: NgZone) 
+    private zone: NgZone,
+    private toastService: ToastService,
+    ) 
 
     {
       this.ReservaForm = this.formBuilder.group
@@ -32,34 +37,26 @@ export class ReservasPage implements OnInit {
         email: ['']
       })
     }
-    // { 
-    // this.data = new Reserva();
-    // }
-
-
 
   ngOnInit() {    
   }
 
   onFormSubmit() {
-    if (!this.ReservaForm.valid) {
-      return false;
-    } else {
-      this.reservaHabitacion.addReserva(this.ReservaForm.value)
-        .subscribe((res) => {
-          this.zone.run(() => {
-            console.log(res)
-            this.ReservaForm.reset();
-            // this.router.navigate(['/home-result']);
-            
+    if (!this.ReservaForm.valid) { return false; }
+    else {
+      if
+        (
+        this.reservaHabitacion.addReserva(this.ReservaForm.value)
+          .subscribe((res) => {
+            this.zone.run(() => {
+              console.log(res)
+              this.toastService.presentToast('Reserva guardada. Muchas Gracias');
+              this.ReservaForm.reset();
+            })
           })
-        });
+      ) {
+        this.toastService.presentToast('Error, consulte con el administrador');
+      }
     }
-  }
-
-
-  // GuardarReserva() {
-  //   this.reservaHabitacion.createItem(this.data).subscribe((response) => {
-  //     this.router.navigate(['list']);
-  //   });}
+}
 }

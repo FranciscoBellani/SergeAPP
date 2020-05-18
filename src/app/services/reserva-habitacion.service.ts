@@ -58,19 +58,4 @@ export class ReservaHabitacionService {
              console.log("Consulta: "+ JSON.stringify(this.consulta));
              return this.consulta;           
   }
-  // Manejo de Errores
-  // handleError(error: HttpErrorResponse) {
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Problemas de red o del lado del cliente.
-  //     console.error('Ocurrio un error:', error.error.message);
-  //   } else {
-  //     // Se informa cual es el error.
-  //     console.error(
-  //       `Backend returned code ${error.status}, ` +
-  //       `body was: ${error.error}`);
-  //   }
-  //   return throwError(
-  //   'Algo salio mal; Intente mas tarde por favor.');
-  // };
-
 }
