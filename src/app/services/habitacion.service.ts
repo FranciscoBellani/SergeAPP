@@ -12,6 +12,14 @@ export class HabitacionService {
 
     constructor(private http: HttpClient) { }
     
+    httpOptions = {
+        headers: new HttpHeaders(
+          { 
+            'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+            'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
+        })
+      };
+
     listarHabitaciones(): Observable<any> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -32,4 +40,25 @@ export class HabitacionService {
         });
     }
     
+    cancelarReserva(id:String): any
+    {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                "Access-Control-Allow-Origin": "http://localhost:8080",
+                'Content-Type': 'application/json' ,
+                'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+                'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
+                
+          })
+        }
+       
+       return this.http.post("http://localhost:8080/restful/objects/simple.ReservaHabitacion/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
+           .subscribe(data => {
+             console.log(data['_body']);
+            }, error => {
+             console.log(error);
+           });
+    }
+
 }
