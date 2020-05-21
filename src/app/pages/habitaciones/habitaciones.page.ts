@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HabitacionService } from './../../services/habitacion.service'
-
+import { debug } from 'util';
+import { ToastService } from './../../services/toast.service';
 
 @Component({
   selector: 'app-habitaciones',
@@ -15,8 +16,9 @@ export class HabitacionesPage implements OnInit {
   currency: any;
   enablePromo: any;
   enableHistory: any;
+  Reservas: any = [];
 
-  constructor(public navCtrl: NavController, private habitacionService: HabitacionService) { }
+  constructor(public navCtrl: NavController, private habitacionService: HabitacionService,private toastService: ToastService,) { }
 
   ngOnInit() 
   {    
@@ -28,6 +30,22 @@ export class HabitacionesPage implements OnInit {
     this.habitacionService.listarHabitaciones().subscribe(data => {
       this.habitacionesArray = data;
     })
+  }
+
+  cancelarReserva(id:String) {
+    if (window.confirm('¿Cancelar esta reserva?')) {
+      debugger
+      if(this.habitacionService.cancelarReserva(id))
+      {
+        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
+        this.Reservas.splice(id, 1);
+        console.log('Reserva Cancelada');
+        this.navCtrl.navigateForward('/habitaciones');
+      }
+      else{
+        this.toastService.presentToast('Error, consulte con el administrador');
+      }
+  }
   }
 
   cargarProfile() {
