@@ -10,26 +10,21 @@
     </ion-title>    
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
        <ion-list>
-          <ion-item *ngFor="let habitacion of habitacionesArray">
-            <ion-label>
-            <h3> {{ habitacion.persona["title"] }}</h3>
-            <h3> {{ habitacion.habitacion["title"] }}</h3>
-            <h3>Finaliza: {{ habitacion.fechaFin }}</h3>
-            </ion-label>
-            <div class="item-note" item-end>
-                <button ion-button clear (click)="deleteReserva(Reserva, i)">
-                <ion-icon name="trash" size="small" expand="full" shape="round" color="primary"></ion-icon>
-              </button>
-
-              <!-- <ion-button type="submit" size="small" expand="full" shape="round" color="primary">
-                <ion-icon name="trash"></ion-icon>
-              </ion-button> -->
-
-
-            </div>
+          <ion-item *ngFor="let reserva of habitacionesArray">
+            <ion-label>  
+              <h3> Inicia: {{ reserva.fechaInicio}}</h3>
+                <h3> Finaliza: {{ reserva.fechaFin}}</h3>
+                <h3> {{ reserva.habitacion["title"] }}</h3>
+                <h3> {{ reserva.persona["title"] }}</h3>                             
+               </ion-label>               
+                <ion-input type="text" [(ngModel)]="idreserva"></ion-input>
+                <div class="item-note" item-end>
+                  <button clear (click)="cancelarReserva(reserva.$$instanceId)">
+                    <ion-icon name="trash" size="small" expand="full" shape="round" color="primary"></ion-icon>
+                  </button>  
+               </div>
           </ion-item>
         </ion-list>
-</ion-content>
+       </ion-content>
