@@ -4,7 +4,7 @@ import { AlertController,NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehiculoService } from './../../services/vehiculo.service'
 import { debug } from 'util';
-
+import { ToastService } from './../../services/toast.service';
 
 
 @Component({
@@ -18,14 +18,18 @@ export class VehiculosPage implements OnInit {
 
   Reservas: any = [];
   public consulta: any;
-  
+
   constructor(
     
     private activatedRoute: ActivatedRoute,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
-    private vehiculoService: VehiculoService
+    private vehiculoService: VehiculoService,
+    private toastService: ToastService,
+    
     ) { }
+
+    
     public arrayAutorizacion: any = [];
     public solicitanteEmpresa: String;
     public solicitanteTrabajador: String;
@@ -44,8 +48,7 @@ export class VehiculosPage implements OnInit {
     public inputHora: any;
     public inputMotivo: any;
     public fechaHoraUnidas: any;
-    
-
+   
   ngOnInit() {
     
      this.listarvehiculos();
@@ -61,16 +64,34 @@ export class VehiculosPage implements OnInit {
     })
   }
 
+  /*
   cancelarReserva(id:String) {
     if (window.confirm('¿Cancelar esta reserva?')) {
       //debugger
       this.vehiculoService.cancelarReserva(id)
       {
+        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
         this.Reservas.splice(id, 1);
         console.log('Reserva Cancelada');
         this.navCtrl.navigateForward('/vehiculos');
-      } 
+      }
+     
   }
-  }
+  }*/
 
+  cancelarReserva(id:String) {
+    if (window.confirm('¿Cancelar esta reserva?')) {
+      debugger
+      if(this.vehiculoService.cancelarReserva(id))
+      {
+        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
+        this.Reservas.splice(id, 1);
+        console.log('Reserva Cancelada');
+        this.navCtrl.navigateForward('/vehiculos');
+      }
+      else{
+        this.toastService.presentToast('Error, consulte con el administrador');
+      }
+  }
+  }
 }
