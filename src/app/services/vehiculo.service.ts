@@ -15,8 +15,6 @@ export class VehiculoService {
     public consulta: any;
     constructor(private http: HttpClient) { }
 
-   
-  
   public IPServidor: String = 'http://localhost:8080/';
   public URLservidor: String;
 
@@ -50,7 +48,7 @@ export class VehiculoService {
       });
      }
 
-     cancelarReserva(id:String)
+     cancelarReserva(id:String): any
     {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -60,9 +58,10 @@ export class VehiculoService {
                 'Accept':  'application/json;profile=urn:org.apache.isis/v1',
                 'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
                 
-            })
+          })
         }
-           this.http.post("http://localhost:8080/restful/objects/simple.ReservaVehiculo/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
+       
+       return this.http.post("http://localhost:8080/restful/objects/simple.ReservaVehiculo/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
            .subscribe(data => {
              console.log(data['_body']);
             }, error => {
@@ -70,6 +69,4 @@ export class VehiculoService {
            });
     }
    
-   
-  
 }
