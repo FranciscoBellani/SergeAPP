@@ -12,7 +12,7 @@ import { ToastService } from './../../services/toast.service';
 })
 export class ReservasVehiculosPage implements OnInit {
   public ReservaForm: FormGroup;
-    
+      
   minDate: string = new Date().toISOString();
   selectedDate: string = new Date().toISOString();
 
@@ -38,6 +38,17 @@ export class ReservasVehiculosPage implements OnInit {
 
 
   ngOnInit() {
+    this.ReservaForm = this.formBuilder.group({
+      'fechaInicio': [null, Validators.compose([
+        Validators.required
+      ])],
+      'fechaFin': [null, Validators.compose([
+        Validators.required
+      ])],
+      'email': [null, Validators.compose([
+        Validators.required
+      ])]
+    });
   }
 
   onFormSubmit() {
