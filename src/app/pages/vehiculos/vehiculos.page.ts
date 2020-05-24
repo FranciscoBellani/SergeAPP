@@ -29,55 +29,35 @@ export class VehiculosPage implements OnInit {
     
     ) { }
 
-    
-    public arrayAutorizacion: any = [];
-    public solicitanteEmpresa: String;
-    public solicitanteTrabajador: String;
-    public solicitanteVehiculo: String;
-    public empresasEjecutantes: any =[];
-    public empresasEjecutantesLargo: any;
-    public trabajadoresEjecutantes: any;
-    public trabajadoresEjecutantesLargo :any;
-    public vehiculosEjecutantes: any;
-    public vehiculosEjecutantesLargo: any;
-    public permiteBtnCerrar: boolean;
-    public recipeId: any;
-    public FechaHoraPersonalizada: any;
-    //private alertCtrl: AlertController;
-    public inputFecha: any;
-    public inputHora: any;
-    public inputMotivo: any;
-    public fechaHoraUnidas: any;
+    public arrayVehiculos : any = null;
+    public resultadosArraytemp : any;
+    public resultadosArrayFiltrado = [];
+
    
-  ngOnInit() {
-    
-     this.listarvehiculos();
-
-
+  ngOnInit() {    
+     this.listarTodoslosVehiculos();
   }
 
-  vehiculosArray: any;
-
-  listarvehiculos() {
-    this.vehiculoService.listarvehiculos().subscribe(data => {
-      this.vehiculosArray = data;
-    })
-  }
-
-  /*
-  cancelarReserva(id:String) {
-    if (window.confirm('¿Cancelar esta reserva?')) {
-      //debugger
-      this.vehiculoService.cancelarReserva(id)
-      {
-        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
-        this.Reservas.splice(id, 1);
-        console.log('Reserva Cancelada');
-        this.navCtrl.navigateForward('/vehiculos');
-      }
-     
-  }
-  }*/
+  listarTodoslosVehiculos() {
+    this.arrayVehiculos = [];
+    this.resultadosArrayFiltrado = [];
+    this.vehiculoService.listarvehiculos()
+    .subscribe(
+      contenidoObtenido => {
+        this.arrayVehiculos = contenidoObtenido;
+        this.resultadosArraytemp = this.arrayVehiculos;
+        this.resultadosArraytemp.pop()
+      
+        const largoArray = this.resultadosArraytemp.length;
+        for (var i = 0; i < largoArray;) 
+         {                 
+            this.resultadosArrayFiltrado.push(this.arrayVehiculos[i]);         
+             i = i+1;
+        }        
+        this.resultadosArrayFiltrado.sort(( a, b ) => parseInt(a.$$instanceId, 10) - parseInt(b.$$instanceId, 10) )        
+        this.arrayVehiculos = this.resultadosArrayFiltrado;       
+    });
+  } 
 
   cancelarReserva(id:String) {
     if (window.confirm('¿Cancelar esta reserva?')) {

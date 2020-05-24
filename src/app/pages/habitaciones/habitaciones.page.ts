@@ -10,28 +10,19 @@ import { ToastService } from './../../services/toast.service';
   styleUrls: ['./habitaciones.page.scss'],
 })
 export class HabitacionesPage implements OnInit {
-  lang: any;
-  enableNotifications: any;
-  paymentMethod: any;
-  currency: any;
-  enablePromo: any;
-  enableHistory: any;
+  
   Reservas: any = [];
 
   constructor(public navCtrl: NavController, private habitacionService: HabitacionService,private toastService: ToastService,) { }
+  public arrayHabitaciones : any = null;
+  public resultadosArraytemp : any;
+  public resultadosArrayFiltrado = [];
 
   ngOnInit() 
   {    
-    this.listarHabitaciones();
+    this.listarTodasLasHabitaciones();
   }
-  habitacionesArray: any;
-
-  listarHabitaciones() {
-    this.habitacionService.listarHabitaciones().subscribe(data => {
-      this.habitacionesArray = data;
-    })
-  }
-
+  
   cancelarReserva(id:String) {
     if (window.confirm('¿Cancelar esta reserva?')) {
       debugger
@@ -48,23 +39,24 @@ export class HabitacionesPage implements OnInit {
   }
   }
 
-  cargarProfile() {
-    this.navCtrl.navigateForward('');
-  }
-
-  editarProfile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
-
-  eliminarProfile() {
-    this.navCtrl.navigateForward('');
-  }
-
-
-  logout() {
-    this.navCtrl.navigateRoot('/');
-  }
-
-
-
+  listarTodasLasHabitaciones() {
+    this.arrayHabitaciones = [];
+    this.resultadosArrayFiltrado = [];
+    this.habitacionService.listarHabitaciones()
+    .subscribe(
+      contenidoObtenido => {
+        this.arrayHabitaciones = contenidoObtenido;
+        this.resultadosArraytemp = this.arrayHabitaciones;
+        this.resultadosArraytemp.pop()
+      
+        const largoArray = this.resultadosArraytemp.length;
+        for (var i = 0; i < largoArray;) 
+         {                 
+            this.resultadosArrayFiltrado.push(this.arrayHabitaciones[i]);         
+             i = i+1;
+        }        
+        this.resultadosArrayFiltrado.sort(( a, b ) => parseInt(a.$$instanceId, 10) - parseInt(b.$$instanceId, 10) )        
+        this.arrayHabitaciones = this.resultadosArrayFiltrado;        
+    });
+  } 
 }
