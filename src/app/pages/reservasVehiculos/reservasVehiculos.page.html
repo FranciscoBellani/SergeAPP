@@ -7,6 +7,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-card class="bg-white" no-margin>
+    <ion-card-content>
+      <h1 margin-bottom>
+        <ion-text color="primary">Formulario de <strong> Reserva:</strong></ion-text>
+      </h1>
+      <img src="assets/img/camionetas.png">
+      <div class="spacer" style="height: 10px;"></div>
+      <p margin-bottom>
+        Por favor asegurese de completar todos los campos. Para asegurar disponibilidad realizar reserva al menos un dia antes de la misma.
+      </p>      
+    </ion-card-content>
+  </ion-card>
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form [formGroup]="ReservaForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
