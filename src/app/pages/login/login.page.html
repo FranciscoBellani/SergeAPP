@@ -10,6 +10,7 @@
     </div>
 
     <form [formGroup]="onLoginForm" class="list-form" (ngSubmit)="onSubmit()">
+      <div class="spacer" style="height: 40px;"></div>
       <ion-item no-padding class="animated fadeInUp"  id="rounded">
         <ion-label position="floating">
           <ion-icon name="person-circle" item-start></ion-icon>
@@ -33,7 +34,7 @@
       <p ion-text *ngIf="onLoginForm.get('contrasena').touched && onLoginForm.get('contrasena').hasError('required')">
         <ion-text color="danger">Campo requerido</ion-text>
       </p>
-  
+      <div class="spacer" style="height: 20px;"></div>
         <ion-button type="submit" icon-left size="medium" expand="full" shape="round" color="primary" [disabled]="onLoginForm.invalid" tappable>
           <ion-icon name="log-in"></ion-icon>
           Ingresar
