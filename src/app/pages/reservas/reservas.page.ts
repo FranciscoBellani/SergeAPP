@@ -39,6 +39,17 @@ export class ReservasPage implements OnInit {
     }
 
   ngOnInit() {    
+    this.ReservaForm = this.formBuilder.group({
+      'fechaInicio': [null, Validators.compose([
+        Validators.required
+      ])],
+      'fechaFin': [null, Validators.compose([
+        Validators.required
+      ])],
+      'email': [null, Validators.compose([
+        Validators.required
+      ])]
+    });
   }
 
   onFormSubmit() {

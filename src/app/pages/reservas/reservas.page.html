@@ -13,21 +13,38 @@
         <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
       <ion-label color="primary">Elija Fecha Inicio</ion-label>    
       <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" dateformat="DD/MM/YYYY" [min]="minDate" formControlName="fechaInicio"></ion-datetime>
+      <p ion-text *ngIf="ReservaForm.get('fechaInicio').touched && ReservaForm.get('fechaInicio').hasError('required')">
+        <ion-text color="danger">
+          Campo requerido
+        </ion-text>
+      </p>
       </ion-item>
       <ion-item>
       <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
       <ion-label color="primary">Elija Fecha Fin</ion-label>    
       <ion-datetime #datePicker pickerFormat="DD/MM/YYYY" [min]="minDate" dateformat="DD/MM/YYYY" formControlName="fechaFin" ></ion-datetime>
+      <p ion-text *ngIf="ReservaForm.get('fechaFin').touched && ReservaForm.get('fechaFin').hasError('required')">
+        <ion-text color="danger">
+          Campo requerido
+        </ion-text>
+      </p>
       </ion-item>
       <ion-item>
         <ion-icon name="mail" slot="start" color="primary"></ion-icon>
         <ion-label color="dark" position="stacked">Ingrese su email:</ion-label>
       <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com" formControlName="email" ></ion-input>
       </ion-item>
-
+      <p ion-text *ngIf="ReservaForm.get('email').touched && ReservaForm.get('email').hasError('required')">
+        <ion-text color="danger">
+          Campo requerido
+        </ion-text>
+      </p>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Hacer Reserva</ion-button>
+          <ion-button type="submit" icon-left size="medium" expand="full" shape="round" color="primary" [disabled]="ReservaForm.invalid" tappable>
+            <ion-icon name="log-in"></ion-icon>
+            Hacer Reserva
+          </ion-button>
         </ion-col>
       </ion-row>
     </form>
