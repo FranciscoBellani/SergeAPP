@@ -42,6 +42,7 @@ export class HomeResultsPage implements OnInit {
 
   settings() {
     this.navCtrl.navigateForward('settings');
+    
   }
 
   async alertLocation() {
@@ -98,17 +99,10 @@ export class HomeResultsPage implements OnInit {
     return await modal.present();
   }
 
-  // async notifications(ev: any) {
-  //   const popover = await this.popoverCtrl.create({
-  //     component: ,
-  //     event: ev,
-  //     animated: true,
-  //     showBackdrop: true
-  //   });
-  //   return await popover.present();
-  // }
-
- 
+  
+  goResHab() {
+   this.navCtrl.navigateForward('/reservas');
+  }
 
   ngOnInit() {
     
