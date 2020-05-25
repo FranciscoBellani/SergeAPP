@@ -52,7 +52,7 @@ export class ReservasPage implements OnInit {
     });
   }
 
-  onFormSubmit() {
+  onSubmit() {
     if (!this.ReservaForm.valid) { return false; }
     else {
       if
