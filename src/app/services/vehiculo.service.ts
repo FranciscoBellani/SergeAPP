@@ -68,5 +68,24 @@ export class VehiculoService {
              console.log(error);
            });
     }
+    listarvehiculosDisponibles(): Observable<any> {
+        
+      if(window.localStorage.URLservidor){
+          this.URLservidor = window.localStorage.URLservidor;
+        }else{
+          this.URLservidor = this.IPServidor;
+        }
+      
+      const httpOptions = {
+          headers: new HttpHeaders({
+            'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+            'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
+          })
+      }
+
+      
+      return this.http.get<any>(this.URLservidor+'/restful/services/Vehiculo/actions/listarVehiculosDisponibles/invoke'
+      , httpOptions );
+  }
    
 }
