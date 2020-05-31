@@ -44,7 +44,7 @@
       <ion-item>
         <ion-icon name="mail" slot="start" color="primary"></ion-icon>
         <ion-label color="dark" position="stacked">Ingrese su email:</ion-label>
-      <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com" formControlName="email" ></ion-input>
+      <ion-input inputmode="text" placeholder="Ej.: xxx@tecpetrol.com" formControlName="email" [(ngModel)]="inputValue"></ion-input>
       </ion-item>
       <p ion-text *ngIf="ReservaForm.get('email').touched && ReservaForm.get('email').hasError('required')">
         <ion-text color="danger">
