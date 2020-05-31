@@ -59,19 +59,37 @@ export class VehiculosPage implements OnInit {
     });
   } 
 
-  cancelarReserva(id:String) {
-    if (window.confirm('¿Cancelar esta reserva?')) {
-      debugger
-      if(this.vehiculoService.cancelarReserva(id))
-      {
-        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
-        this.Reservas.splice(id, 1);
-        console.log('Reserva Cancelada');
-        this.navCtrl.navigateForward('/vehiculos');
-      }
-      else{
-        this.toastService.presentToast('Error, consulte con el administrador');
-      }
-  }
-  }
+  async cancelarReserva(id:String) 
+  {
+    const alert = await this.alertCtrl.create({
+      header: 'Cancelar Reserva',
+      message: 'Cancelar reserva?',
+      buttons: [
+        {
+          text: 'Si',
+          role: 'si',
+          handler: () => {
+            console.log('Se clikeo si cancelar');
+            {
+              if(this.vehiculoService.cancelarReserva(id))
+                  {
+                    this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
+                    this.Reservas.splice(id, 1);
+                    console.log('Reserva Cancelada');
+                   this.navCtrl.navigateForward('/vehiculos');
+                   this.ngOnInit();
+                  }
+            }
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Se clickeo no cancelar');
+          }
+        }
+      ]
+    });
+    await alert.present();
+    }
 }

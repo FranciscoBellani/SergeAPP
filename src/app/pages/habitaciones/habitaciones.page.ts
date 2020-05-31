@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController,AlertController  } from '@ionic/angular';
 import { HabitacionService } from './../../services/habitacion.service'
 import { debug } from 'util';
 import { ToastService } from './../../services/toast.service';
@@ -13,7 +13,7 @@ export class HabitacionesPage implements OnInit {
   
   Reservas: any = [];
 
-  constructor(public navCtrl: NavController, private habitacionService: HabitacionService,private toastService: ToastService,) { }
+  constructor(public navCtrl: NavController, private habitacionService: HabitacionService,private toastService: ToastService, private alertCtrl: AlertController) { }
   public arrayHabitaciones : any = null;
   public resultadosArraytemp : any;
   public resultadosArrayFiltrado = [];
@@ -23,21 +23,57 @@ export class HabitacionesPage implements OnInit {
     this.listarTodasLasHabitaciones();
   }
   
-  cancelarReserva(id:String) {
-    if (window.confirm('¿Cancelar esta reserva?')) {
-      debugger
-      if(this.habitacionService.cancelarReserva(id))
-      {
-        this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
-        this.Reservas.splice(id, 1);
-        console.log('Reserva Cancelada');
-        this.navCtrl.navigateForward('/habitaciones');
-      }
-      else{
-        this.toastService.presentToast('Error, consulte con el administrador');
-      }
-  }
-  }
+  async cancelarReserva(id:String) 
+  {
+    const alert = await this.alertCtrl.create({
+      header: 'Cancelar Reserva',
+      message: 'Cancelar reserva?',
+      buttons: [
+        {
+          text: 'Si',
+          role: 'si',
+          handler: () => {
+            console.log('Se clikeo si cancelar');
+            {
+              if(this.habitacionService.cancelarReserva(id))
+                  {
+                    this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
+                    this.Reservas.splice(id, 1);
+                    console.log('Reserva Cancelada');
+                   this.navCtrl.navigateForward('/habitaciones');
+                   this.ngOnInit();
+                  }
+            }
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Se clickeo no cancelar');
+          }
+        }
+      ]
+    });
+    await alert.present();
+    }
+
+
+  // cancelarReserva(id:String) {
+  //   if (window.confirm('¿Cancelar esta reserva?')) 
+  //   {
+  //     debugger
+  //     if(this.habitacionService.cancelarReserva(id))
+  //     {
+  //       this.toastService.presentToast('Reserva Cancelada. Muchas Gracias');
+  //       this.Reservas.splice(id, 1);
+  //       console.log('Reserva Cancelada');
+  //       this.navCtrl.navigateForward('/habitaciones');
+  //     }
+  //     else{
+  //       this.toastService.presentToast('Error, consulte con el administrador');
+  //     }
+  //   }
+  // }
 
   listarTodasLasHabitaciones() {
     this.arrayHabitaciones = [];

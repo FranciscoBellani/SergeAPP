@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, MenuController, LoadingController } from '@ionic/angular';
+import { NavController, MenuController, LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ReservaVehiculoService } from './../../services/reserva-vehiculo.service'
+import { ReservaVehiculoService } from './../../services/reserva-vehiculo.service';
+import { VehiculoService } from './../../services/vehiculo.service';
 import { ToastService } from './../../services/toast.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class ReservasVehiculosPage implements OnInit {
   constructor(
 
     public reservaVehiculo: ReservaVehiculoService,
+    public vehiculoService:VehiculoService,
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
@@ -26,6 +28,7 @@ export class ReservasVehiculosPage implements OnInit {
     public router: Router,
     private zone: NgZone,
     private toastService: ToastService,
+    public toastController: ToastController
 
   ) {
     this.ReservaForm = this.formBuilder.group
@@ -50,25 +53,7 @@ export class ReservasVehiculosPage implements OnInit {
       ])]
     });
   }
+  
+  
 
-  onFormSubmit() {
-    if (!this.ReservaForm.valid) { return false; }
-    else {
-      if
-        (
-        this.reservaVehiculo.addReserva(this.ReservaForm.value)
-          .subscribe((res) => {
-            this.zone.run(() => {
-              console.log(res)
-              this.toastService.presentToast('Reserva guardada. Muchas Gracias');
-              this.ReservaForm.reset();
-            })
-          })
-      ) {
-        this.toastService.presentToast('Error, consulte con el administrador');
-      }
-    }
-    
-
-  }
 }
