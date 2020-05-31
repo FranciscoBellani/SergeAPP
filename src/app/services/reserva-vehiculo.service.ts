@@ -18,6 +18,10 @@ export class ReservaVehiculoService {
   public nuevafechaFin:string
 
   constructor(private http: HttpClient) { }
+  
+  public IPServidor: String = 'http://192.168.0.66:8080';
+  public URLservidor: String;
+
   // metodo para crear reserva
   addReserva(reservaParameter: Reserva)     
     {
@@ -29,19 +33,25 @@ export class ReservaVehiculoService {
        this.nuevafechaFin = this.fechaFin.split('T')[0];
        this.nuevafechaInicio=this.fechaInicio.split('T')[0];
              
+
+       if(window.localStorage.URLservidor){
+        this.URLservidor = window.localStorage.URLservidor;
+      }else{
+        this.URLservidor = this.IPServidor;
+      }
        
         // Http Parametros de validacion y permisos de acceso
       const httpOptions = {
        headers: new HttpHeaders(
         { 
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          "Access-Control-Allow-Origin": "http://localhost:8080",
-          'Content-Type': 'application/json' ,
+          //"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          //"Access-Control-Allow-Origin": "http://localhost:8080",
+          //'Content-Type': 'application/json' ,
           'Accept':  'application/json;profile=urn:org.apache.isis/v1',
           'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',    
          })
         };    
-           this.consulta = this.http.post('http://localhost:8080/restful/services/ReservaVehiculo/actions/crearReserva/invoke',
+           this.consulta = this.http.post(this.URLservidor+'/restful/services/ReservaVehiculo/actions/crearReserva/invoke',
             {
              "fechaInicio": {
              "value": this.nuevafechaInicio            
