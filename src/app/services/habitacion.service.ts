@@ -12,6 +12,10 @@ export class HabitacionService {
 
     constructor(private http: HttpClient) { }
     
+    public IPServidor: String = 'http://192.168.1.100:8080';
+    public URLservidor: String;
+  
+
     httpOptions = {
         headers: new HttpHeaders(
           { 
@@ -21,23 +25,39 @@ export class HabitacionService {
       };
 
     listarHabitaciones(): Observable<any> {
+        
+        if(window.localStorage.URLservidor){
+            this.URLservidor = window.localStorage.URLservidor;
+          }else{
+            this.URLservidor = this.IPServidor;
+          }
+        
         const httpOptions = {
             headers: new HttpHeaders({
               'Accept':  'application/json;profile=urn:org.apache.isis/v1',
               'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
             })
         }
-        return this.http.get<any>(this.urlHabitacion, httpOptions );
+        return this.http.get<any>(this.URLservidor+'/restful/services/ReservaHabitacion/actions/listarReservasDeHabitacionesActivas/invoke'
+        , httpOptions );
     }
 
     listarHabitacionesDisponibles(): Observable<any> {
+        
+        if(window.localStorage.URLservidor){
+            this.URLservidor = window.localStorage.URLservidor;
+          }else{
+            this.URLservidor = this.IPServidor;
+          }
+        
         const httpOptions = {
             headers: new HttpHeaders({
               'Accept':  'application/json;profile=urn:org.apache.isis/v1',
               'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
             })
         }
-        return this.http.get<any>('http://localhost:8080/restful/services/Habitacion/actions/listarHabitacionesDisponibles/invoke', httpOptions );
+        return this.http.get<any>(this.URLservidor+'/restful/services/Habitacion/actions/listarHabitacionesDisponibles/invoke'
+        , httpOptions );
     }
 
     guardarHabitacion(habitacion): Promise<any> {
@@ -53,23 +73,29 @@ export class HabitacionService {
     
     cancelarReserva(id:String): any
     {
+        
+        if(window.localStorage.URLservidor){
+            this.URLservidor = window.localStorage.URLservidor;
+          }else{
+            this.URLservidor = this.IPServidor;
+          }
+
         const httpOptions = {
             headers: new HttpHeaders({
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-                "Access-Control-Allow-Origin": "http://localhost:8080",
-                'Content-Type': 'application/json' ,
+                //"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                //"Access-Control-Allow-Origin": "http://localhost:8080",
+                //'Content-Type': 'application/json' ,
                 'Accept':  'application/json;profile=urn:org.apache.isis/v1',
                 'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
                 
           })
         }
        
-       return this.http.post("http://localhost:8080/restful/objects/simple.ReservaHabitacion/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
+       return this.http.post(this.URLservidor+"/restful/objects/simple.ReservaHabitacion/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
            .subscribe(data => {
              console.log(data['_body']);
             }, error => {
              console.log(error);
            });
     }
-
 }
