@@ -29,6 +29,17 @@ export class HabitacionService {
         }
         return this.http.get<any>(this.urlHabitacion, httpOptions );
     }
+
+    listarHabitacionesDisponibles(): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Accept':  'application/json;profile=urn:org.apache.isis/v1',
+              'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
+            })
+        }
+        return this.http.get<any>('http://localhost:8080/restful/services/Habitacion/actions/listarHabitacionesDisponibles/invoke', httpOptions );
+    }
+
     guardarHabitacion(habitacion): Promise<any> {
         return new Promise((resolve, reject) => {
             debugger;
