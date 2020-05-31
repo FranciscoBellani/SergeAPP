@@ -15,8 +15,8 @@ export class VehiculoService {
     public consulta: any;
     constructor(private http: HttpClient) { }
 
-  public IPServidor: String = 'http://localhost:8080/';
-  public URLservidor: String;
+    public IPServidor: String = 'http://192.168.1.100:8080';
+    public URLservidor: String;
 
     httpOptions = {
       headers: new HttpHeaders(
@@ -27,13 +27,21 @@ export class VehiculoService {
     };
     
     listarvehiculos(): Observable<any> {
-        const httpOptions = {
+      
+      if(window.localStorage.URLservidor){
+        this.URLservidor = window.localStorage.URLservidor;
+      }else{
+        this.URLservidor = this.IPServidor;
+      }  
+      
+      const httpOptions = {
             headers: new HttpHeaders({
               'Accept':  'application/json;profile=urn:org.apache.isis/v1',
               'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==',
             })
         }
-        return this.http.get<any>(this.urlVehiculo, httpOptions );
+        return this.http.get<any>(this.URLservidor+'/restful/services/ReservaVehiculo/actions/listarReservasDeVehiculosActivas/invoke'
+        ,httpOptions );
     }
 
     guardarVehiculo(vehiculo): Promise<any> {
@@ -50,18 +58,24 @@ export class VehiculoService {
 
      cancelarReserva(id:String): any
     {
+      if(window.localStorage.URLservidor){
+        this.URLservidor = window.localStorage.URLservidor;
+      }else{
+        this.URLservidor = this.IPServidor;
+      }
+      
         const httpOptions = {
             headers: new HttpHeaders({
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-                "Access-Control-Allow-Origin": "http://localhost:8080",
-                'Content-Type': 'application/json' ,
+               // "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+               // "Access-Control-Allow-Origin": "http://localhost:8080",
+               // 'Content-Type': 'application/json' ,
                 'Accept':  'application/json;profile=urn:org.apache.isis/v1',
                 'Authorization': 'Basic aXNpcy1tb2R1bGUtc2VjdXJpdHktYWRtaW46cGFzcw==', 
                 
           })
         }
        
-       return this.http.post("http://localhost:8080/restful/objects/simple.ReservaVehiculo/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
+       return this.http.post(this.URLservidor+"/restful/objects/simple.ReservaVehiculo/"+id+"/actions/cancelar/invoke",{}, this.httpOptions)
            .subscribe(data => {
              console.log(data['_body']);
             }, error => {
