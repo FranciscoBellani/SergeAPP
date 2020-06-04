@@ -11,9 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// Modal Pages
-import { ImagePageModule } from './pages/modal/image/image.module';
-import { SearchFilterPageModule } from './pages/modal/search-filter/search-filter.module';
+
 
 // Components
 
@@ -29,8 +27,7 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
     IonicModule.forRoot({ backButtonText: 'Atras' }),
     AppRoutingModule,
     HttpClientModule,
-    ImagePageModule,
-    SearchFilterPageModule
+    
   ],
   entryComponents: [],
   providers: [
