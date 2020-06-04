@@ -97,11 +97,11 @@ export class ReservasVehiculosPage implements OnInit {
               if(largoArray>1){
                      this.reservaVehiculo.addReserva(this.ReservaForm.value)
                      .subscribe(data => {
-                     alert("EXITO "+data);
+                    //  alert("EXITO "+data);
                      this.toastService.presentToast('Reserva guardada. Muchas Gracias');
                      this.ReservaForm.reset();
                      }, (err) => {
-                          alert("Fallo");
+                          // alert("Fallo");
                           this.toastService.presentToast('Error, consulte con el administrador');
                      });
           

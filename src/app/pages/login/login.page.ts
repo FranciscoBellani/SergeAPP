@@ -64,12 +64,12 @@ export class LoginPage implements OnInit {
     this.direccionURL = this.URLservidor;
     return fetch(this.direccionURL, {mode: "no-cors"})
     .then(res => {
-      console.log('La URL "'+this.direccionURL+'" si existe.');
+      // console.log('La URL "'+this.direccionURL+'" si existe.');
       this.invalidServidor = false;
       
     })
     .catch(err => {
-      console.log('La URL "'+this.direccionURL+'" NO existe.');
+      // console.log('La URL "'+this.direccionURL+'" NO existe.');
       this.invalidServidor = true;
       this.elegirURLservidorPrompt(this.direccionURL);
     })
@@ -111,9 +111,9 @@ export class LoginPage implements OnInit {
     (response) => {   
 
     if (response && response.length) {         
-      this.navCtrl.navigateRoot('/home-results');
+      this.navCtrl.navigateRoot('/inicio');
       this.GuardaUsuarioEnCookie(this.usuario);
-      this.toastService.presentToast('Bienvenido: '+this.usuario);
+      this.toastService.presentToast('Bienvenido al sistema: '+this.usuario);
     }
     },
     (error) => {

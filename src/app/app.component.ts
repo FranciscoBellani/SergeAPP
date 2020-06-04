@@ -54,7 +54,7 @@ export class AppComponent {
       },
       {
         title: 'Contacto',
-        url: '/about',
+        url: '/nosotros',
         direct: 'forward',
         icon: 'open'
       },
@@ -71,9 +71,6 @@ export class AppComponent {
     }).catch(() => {});
   }
 
-  goToEditProgile() {
-    this.navCtrl.navigateForward('edit-profile');
-  }
 
   logout() {
     this.navCtrl.navigateRoot('/');

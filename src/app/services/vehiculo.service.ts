@@ -15,7 +15,7 @@ export class VehiculoService {
     public consulta: any;
     constructor(private http: HttpClient) { }
 
-    public IPServidor: String = 'http://192.168.1.100:8080';
+    public IPServidor: String = 'http://localhost:8080';
     public URLservidor: String;
 
     httpOptions = {

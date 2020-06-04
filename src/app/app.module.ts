@@ -26,7 +26,7 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ backButtonText: 'Atras' }),
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,

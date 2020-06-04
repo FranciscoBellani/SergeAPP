@@ -200,11 +200,11 @@ public verificaDisponibilidadPorEmail(correo :string): any{
                      if(valorDis==true){
                              this.reservaHabitacion.addReserva(this.ReservaForm.value)
                             .subscribe(data => {
-                             alert("EXITO "+data);
+                            //  alert("EXITO "+data);
                             this.toastService.presentToast('Reserva guardada. Muchas Gracias');
                             this.ReservaForm.reset();
                             }, (err) => {
-                            alert("Fallo");
+                            // alert("Fallo");
                             this.toastService.presentToast('Error, consulte con el administrador');
                             });     
                     }else{
